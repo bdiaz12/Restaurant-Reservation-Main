@@ -4,8 +4,6 @@
 > The software is used only by restaurant personnel when a customer calls to request a reservation.
 
 
-You can find the live application here: https://restaurant-reservation-frontend-ebwe.onrender.com/
-
 
 
 ##### Request and Response Format
