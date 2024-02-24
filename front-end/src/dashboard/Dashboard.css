@@ -1,0 +1,27 @@
+
+
+.button{
+
+    justify-content: center;
+    margin-top: 10px;
+    
+}
+
+h1{
+    font-family: Poppins;
+    text-align: center;
+}
+
+main div h4{
+    font-family: Poppins;
+    /* text-align: center; */
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+  
+ 
+}
+
+div{
+    margin-bottom: 15px;
+}
