@@ -6,10 +6,8 @@ import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-date";
 
 const API_BASE_URL =
-
-
-  process.env.REACT_APP_API_BASE_URL || "https://restaurant-reservation-backend-k5h3.onrender.com";
-
+  process.env.REACT_APP_API_BASE_URL ||
+  "https://restaurant-reservation-backend-k5h3.onrender.com";
 
 /**
  * Defines the default headers for these functions to work with `json-server`
@@ -69,15 +67,7 @@ export async function listReservations(params, signal) {
     );
 
     // Making the API request and handling the response
-    const response = await fetchJson(url, { headers, signal }, []);
-
-    if (!response.ok) {
-      // If the response status is not okay, throw an error with the status text
-      throw new Error(`Failed to fetch reservations: ${response.statusText}`);
-    }
-
-    // Assuming the response contains JSON data
-    const data = await response.json();
+    const data = await fetchJson(url.href, { headers, signal }, []);
 
     // Formatting the reservation data
     const formattedData = formatReservationTime(formatReservationDate(data));
