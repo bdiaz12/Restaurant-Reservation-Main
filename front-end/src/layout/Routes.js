@@ -5,12 +5,11 @@ import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
 import NewReservation from "../reservations/NewReservation";
-import tables from "../tables";
+import Tables from "../tables";
 import Seat from "../Seat";
 import Search from "../Search";
 import Edit from "../Edit";
 import EditReservationForm from "../reservations/EditReservationForm";
-
 
 /**
  * Defines all the routes for the application.
@@ -18,11 +17,9 @@ import EditReservationForm from "../reservations/EditReservationForm";
  * You will need to make changes to this file.
  *
  * @returns {JSX.Element}
- * 
- * 
+ *
+ *
  */
-
-
 
 function Routes() {
   return (
@@ -49,7 +46,7 @@ function Routes() {
         <Search />
       </Route>
       <Route exact={true} path="/tables/new">
-        <tables />
+        <Tables />
       </Route>
       <Route>
         <NotFound />

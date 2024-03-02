@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 import { deleteTableAssignment } from "../utils/api";
-import { updateReservationStatus, listTables } from "../utils/api";
+import {
+  updateReservationStatus,
+  listTables,
+  listReservations,
+} from "../utils/api";
 
 function TableView({ table }) {
   const [currentTable, setCurrentTable] = useState(table);
@@ -19,8 +23,10 @@ function TableView({ table }) {
       const tableToSet = response.find(
         (table) => table.table_id === currentTable.table_id
       );
-      setCurrentTable({ ...tableToSet });
-      listTables();
+      setCurrentTable(tableToSet);
+      await listTables();
+      await listReservations({});
+
       return tableToSet;
     } catch (error) {
       setError(error);
@@ -41,9 +47,8 @@ function TableView({ table }) {
         currentTable.reservation_id,
         abortController.signal
       );
-      debugger;
-      const newTable = await clearAndLoadTables();
-      console.log(newTable);
+
+      await clearAndLoadTables();
       history.push("/dashboard");
       return;
     }
@@ -63,7 +68,7 @@ function TableView({ table }) {
           </p>
           {currentTable.reservation_id && (
             <button
-              data-table-id-finish={table.table_id}
+              data-table-id-finish={currentTable.table_id}
               className="btn btn-danger"
               onClick={handleClear}
             >

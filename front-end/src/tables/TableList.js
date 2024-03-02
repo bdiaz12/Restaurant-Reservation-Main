@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 import { deleteTableAssignment } from "../utils/api";
-import { updateReservationStatus, listTables } from "../utils/api";
+import {
+  updateReservationStatus,
+  listTables,
+  listReservations,
+} from "../utils/api";
 
-function TableList({ table }) {
+function TableList({ table, refreshTables }) {
   const [currentTable, setCurrentTable] = useState(table);
   const history = useHistory();
   const [error, setError] = useState(null);
@@ -16,11 +20,13 @@ function TableList({ table }) {
         currentTable.table_id,
         abortController.signal
       );
+
       const tableToSet = response.find(
         (table) => table.table_id === currentTable.table_id
       );
-      setCurrentTable({ ...tableToSet });
-      listTables();
+
+      setCurrentTable(tableToSet);
+      refreshTables();
       return tableToSet;
     } catch (error) {
       setError(error);
@@ -41,9 +47,7 @@ function TableList({ table }) {
         currentTable.reservation_id,
         abortController.signal
       );
-      debugger;
-      const newTable = await clearAndLoadTables();
-      console.log(newTable);
+      await clearAndLoadTables();
       history.push("/dashboard");
       return;
     }
@@ -63,7 +67,7 @@ function TableList({ table }) {
           </p>
           {currentTable.reservation_id && (
             <button
-              data-table-id-finish={table.table_id}
+              data-table-id-finish={currentTable.table_id}
               className="btn btn-danger"
               onClick={handleClear}
             >

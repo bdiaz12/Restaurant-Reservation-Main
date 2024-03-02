@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createReservation, listReservations } from "../utils/api";
+import {
+  updateReservation,
+  listReservations,
+  getReservation,
+} from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -20,7 +24,18 @@ function EditReservationForm() {
 
   const [reservationError, setReservationError] = useState(null);
 
-  
+  useEffect(() => {
+    getReservationById();
+  }, []);
+
+  const getReservationById = async () => {
+    try {
+      let returnedReservation = await getReservation(reservation_id);
+      setReservation(returnedReservation);
+    } catch (error) {
+      setReservationError(error);
+    }
+  };
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -37,7 +52,7 @@ function EditReservationForm() {
     event.preventDefault();
     const abortController = new AbortController();
     try {
-      await createReservation(reservation, abortController.signal);
+      await updateReservation(reservation, abortController.signal);
       history.push(`/dashboard?date=${reservation.reservation_date}`);
     } catch (error) {
       setReservationError(error);
@@ -49,7 +64,6 @@ function EditReservationForm() {
   return (
     <>
       <h2>Update Reservation</h2>
-
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="first_name" className="mr-5 pr-4">

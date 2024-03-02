@@ -73,9 +73,13 @@ function ReservationDetail({ res }) {
             <></>
           )}
         </td>
-        <td data-reservation-id-cancel={reservation.reservation_id}>
+        <td>
           {reservation.status === "booked" ? (
-            <button className="btn btn-danger" onClick={handleCancelRes}>
+            <button
+              data-reservation-id-cancel={reservation.reservation_id}
+              className="btn btn-danger"
+              onClick={handleCancelRes}
+            >
               Cancel
             </button>
           ) : (

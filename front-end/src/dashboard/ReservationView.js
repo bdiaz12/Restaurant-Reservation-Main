@@ -73,9 +73,13 @@ function ReservationView({ res }) {
             <></>
           )}
         </td>
-        <td data-reservation-id-cancel={reservation.reservation_id}>
+        <td>
           {reservation.status === "booked" ? (
-            <a className="btn btn-danger" onClick={handleCancelRes}>
+            <a
+              data-reservation-id-cancel={reservation.reservation_id}
+              className="btn btn-danger"
+              onClick={handleCancelRes}
+            >
               Cancel
             </a>
           ) : (

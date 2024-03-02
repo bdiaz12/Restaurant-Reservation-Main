@@ -24,7 +24,6 @@ function updateSeatRes(reservation_id, table_id) {
         .where({ table_id })
         .update({
           reservation_id: reservation_id,
-          table_status: "occupied",
         })
         .returning("*");
     });
@@ -36,7 +35,6 @@ function deleteTableAssignment(table_id, reservation_id) {
     .update(
       {
         reservation_id: null,
-        table_status: "free",
       },
       "*"
     )

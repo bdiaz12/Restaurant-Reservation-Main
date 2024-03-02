@@ -23,12 +23,12 @@ function Dashboard({ date }) {
   const location = useLocation();
   const searchedDate = location.search.slice(-10);
 
-  useEffect(loadDashboard, [date]);
+  useEffect(loadDashboard, [currentDate]);
 
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
-    listReservations({ date }, abortController.signal)
+    listReservations({ date: currentDate }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
     return () => abortController.abort();
@@ -58,7 +58,7 @@ function Dashboard({ date }) {
     }
     loadReservations();
     return () => abortController.abort();
-  }, []);
+  }, [currentDate, date, tables]);
 
   // Load all tables
 
@@ -113,6 +113,7 @@ function Dashboard({ date }) {
       .catch((error) => {
         setReservationsError(error);
       });
+
     return () => abortController.abort();
   };
 

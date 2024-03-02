@@ -14,7 +14,6 @@ async function updateSeatRes(req, res) {
     table.table_id
   );
   res.json({ data });
-  console.log("potato", data);
 }
 
 async function deleteTableAssignment(req, res, next) {
