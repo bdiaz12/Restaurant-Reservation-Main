@@ -3,8 +3,7 @@ import { useParams, useHistory } from "react-router";
 import { getReservation, updateReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import EditReservationForm from "../reservations/EditReservationForm";
-import ReservationForm from "../reservations/NewReservation";
-
+import ReservationForm from "../reservations/ReservationForm"; // Import the shared form component
 function EditReservation() {
   const { reservation_id } = useParams();
   const [currentReservation, setCurrentReservation] = useState({
