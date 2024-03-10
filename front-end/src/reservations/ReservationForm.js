@@ -22,7 +22,7 @@ function ReservationForm({ formData, textChangeHandler, numberChangeHandler, han
         </div>
         <div>
           <label htmlFor="mobile_number">Mobile Number:</label>
-          <input type="tel" id="mobile_number" name="mobile_number" onChange={textChangeHandler} value={formData.mobile_number} required/>
+          <input type="tel" id="mobile_number" name="mobile_number" onChange={numberChangeHandler} value={formData.mobile_number} required/>
         </div>
         <div>
           <label htmlFor="reservation_date">Reservation Date:</label>
